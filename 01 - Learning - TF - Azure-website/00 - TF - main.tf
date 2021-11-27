@@ -27,7 +27,7 @@ data "azurerm_resource_group" "tfexistingRG" {
 }
 
 resource "azurerm_storage_account" "tfrsta" {
-  name                     = "${var.storage_account_name}-${random_string.randomname.id}"
+  name                     = "${var.storage_account_name}${random_string.randomname.id}"
   location                 = data.azurerm_resource_group.tfexistingRG.location
   resource_group_name      = data.azurerm_resource_group.tfexistingRG.name
   account_replication_type = var.storage_account_replication_type
