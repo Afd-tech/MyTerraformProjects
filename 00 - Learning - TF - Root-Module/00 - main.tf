@@ -18,7 +18,8 @@ provider "azurerm" {
 }
 
 module "Azure-Website" {
-    source = "./D:/Microsoft/Azure/Azure Devops - IAC/GitHub-Devops - Code/MyTerraformProject/Learn/01 - Learning - TF - Azure-website"
+    source = "git@github.com:Afd-tech/MyTerraformProjects.git"
+    #source = "./D:/Microsoft/Azure/Azure Devops - IAC/GitHub-Devops - Code/MyTerraformProject/Learn/01 - Learning - TF - Azure-website"
     #D:\Microsoft\Azure\Azure Devops - IAC\GitHub-Devops - Code\MyTerraformProject\Virtual Network\01 - Learning - TF - Azure-website
       # Resource Group
 
