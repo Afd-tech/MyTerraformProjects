@@ -1,0 +1,38 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: '1.0.10'
+
+- task: TerraformTaskV2@2
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'MSDN Platforms (3f3a8c46-c2fc-427c-949e-cfc8e1182c2c)'
+    backendAzureRmResourceGroupName: 'Gen-Storage'
+    backendAzureRmStorageAccountName: 'gensstorage'
+    backendAzureRmContainerName: 'tfstatefile'
+    backendAzureRmKey: 'ln6xb2LydoFIdr7GZsknscw6ZznttD1FyQoC1MshnGBFZROr9BSC23Z1kGy1iPJGN76PJ25bQN01AWL6Nuqw5Q=='
+
+- task: TerraformTaskV2@2
+  displayName: 'Terraform Plan'
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'MSDN Platforms (3f3a8c46-c2fc-427c-949e-cfc8e1182c2c)'
+    
+- task: TerraformTaskV2@2
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'MSDN Platforms (3f3a8c46-c2fc-427c-949e-cfc8e1182c2c)'
